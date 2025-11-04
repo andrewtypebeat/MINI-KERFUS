@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://coc7vg00lb014"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7piqu"]
+size = Vector2(4, 4)
+
+[sub_resource type="Gradient" id="Gradient_7piqu"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0t5xj"]
+gradient = SubResource("Gradient_7piqu")
+
+[node name="Node2D" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 643.0
+offset_bottom = 484.0
+texture = SubResource("PlaceholderTexture2D_7piqu")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_left = 42.0
+offset_top = 384.0
+offset_right = 591.0
+offset_bottom = 459.0
+alignment = 1
+backspace_deletes_composite_character_enabled = true
+right_icon = SubResource("GradientTexture2D_0t5xj")
+flat = true
