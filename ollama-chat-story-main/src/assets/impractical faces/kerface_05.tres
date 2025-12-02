@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://sdy43eje0ey1"]
+
+[ext_resource type="Texture2D" uid="uid://btm21v8m7u5la" path="res://assets/kerface_Sheet.png" id="1_4a5ih"]
+
+[resource]
+atlas = ExtResource("1_4a5ih")
+region = Rect2(572, 0, 143, 100)

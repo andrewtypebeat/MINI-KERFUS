@@ -1,0 +1,169 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8scp545pm122"]
+
+[ext_resource type="Texture2D" uid="uid://clk6vh8b2v8l3" path="res://assets/menu.png" id="1_0llpg"]
+[ext_resource type="Script" uid="uid://qe150keyclu6" path="res://main.gd" id="1_rf5wo"]
+[ext_resource type="FontFile" uid="uid://c3v8rjyvvtq3d" path="res://assets/visitor1.ttf" id="2_a1u8q"]
+[ext_resource type="Texture2D" uid="uid://cuyc53nspqeid" path="res://assets/placeholderBG.png" id="2_tm5h3"]
+[ext_resource type="PackedScene" uid="uid://b1rkmrq24fmgw" path="res://http/api_access.tscn" id="4_ao1bj"]
+[ext_resource type="Texture2D" uid="uid://brrqvjlaywtgv" path="res://assets/placeholderFace.png" id="5_ao1bj"]
+[ext_resource type="Script" uid="uid://br2f27415453o" path="res://FACECHANGE.gd" id="6_kgeht"]
+
+[sub_resource type="Animation" id="Animation_kgeht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tm5h3"]
+resource_name = "scroll"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-640, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iyt76"]
+_data = {
+&"RESET": SubResource("Animation_kgeht"),
+&"scroll": SubResource("Animation_tm5h3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tm5h3"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_rf5wo")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_offset = Vector2(1, 0)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(1, 0)
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_right = 1280.0
+offset_bottom = 480.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_tm5h3")
+stretch_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxLayer/TextureRect"]
+deterministic = true
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_iyt76")
+}
+autoplay = "scroll"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(316, 236)
+texture = ExtResource("1_0llpg")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+offset_left = 10.0
+offset_top = 138.0
+offset_right = 120.0
+offset_bottom = 160.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SENDBUTTON" type="Button" parent="VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
+flat = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 307.0
+offset_bottom = 127.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MESSAGE" type="TextEdit" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0.701961, 0.72549, 0.654902, 1)
+theme_override_colors/font_color = Color(0.858824, 0.937255, 0.921569, 1)
+theme_override_fonts/font = ExtResource("2_a1u8q")
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Write something here!"
+wrap_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 10.0
+offset_top = 170.0
+offset_right = 312.0
+offset_bottom = 458.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="ScrollContainer"]
+custom_minimum_size = Vector2(302, 0)
+layout_mode = 2
+
+[node name="RESPONSE" type="RichTextLabel" parent="ScrollContainer/VBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_a1u8q")
+theme_override_font_sizes/bold_italics_font_size = 20
+theme_override_font_sizes/italics_font_size = 20
+theme_override_font_sizes/mono_font_size = 20
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+fit_content = true
+scroll_following = true
+
+[node name="Api_access" parent="." instance=ExtResource("4_ao1bj")]
+unique_name_in_owner = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+offset_left = 334.0
+offset_top = 248.0
+offset_right = 582.0
+offset_bottom = 274.0
+
+[node name="TextEdit" type="TextEdit" parent="VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/background_color = Color(0.701961, 0.72549, 0.654902, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_a1u8q")
+theme_override_font_sizes/font_size = 20
+text = "localhost:11434"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+script = ExtResource("6_kgeht")
+
+[node name="KerFace" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(475, 130)
+texture = ExtResource("5_ao1bj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-10, -10)
+shape = SubResource("RectangleShape2D_tm5h3")
+
+[connection signal="pressed" from="VBoxContainer2/SENDBUTTON" to="." method="_on_sendbutton_pressed"]
+[connection signal="chunkReceived" from="Api_access" to="." method="_on_api_access_chunk_received"]
+[connection signal="connectionSuccess" from="Api_access" to="." method="_on_api_access_connection_success"]
