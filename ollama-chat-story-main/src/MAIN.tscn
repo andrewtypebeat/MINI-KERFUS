@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cuyc53nspqeid" path="res://assets/placeholderBG.png" id="2_tm5h3"]
 [ext_resource type="PackedScene" uid="uid://b1rkmrq24fmgw" path="res://http/api_access.tscn" id="4_ao1bj"]
 [ext_resource type="Texture2D" uid="uid://brrqvjlaywtgv" path="res://assets/placeholderFace.png" id="5_ao1bj"]
-[ext_resource type="Script" uid="uid://br2f27415453o" path="res://FACECHANGE.gd" id="6_kgeht"]
 
 [sub_resource type="Animation" id="Animation_kgeht"]
 length = 0.001
@@ -45,6 +44,13 @@ _data = {
 &"RESET": SubResource("Animation_kgeht"),
 &"scroll": SubResource("Animation_tm5h3")
 }
+
+[sub_resource type="GDScript" id="GDScript_tm5h3"]
+script/source = "extends StaticBody2D
+
+func _ready():
+	var cur_face = 0
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tm5h3"]
 
@@ -154,7 +160,7 @@ theme_override_font_sizes/font_size = 20
 text = "localhost:11434"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-script = ExtResource("6_kgeht")
+script = SubResource("GDScript_tm5h3")
 
 [node name="KerFace" type="Sprite2D" parent="StaticBody2D"]
 position = Vector2(475, 130)
